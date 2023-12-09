@@ -28,20 +28,14 @@ class BaseModel:
             # add this new instance to the FileStorage __objects
             storage.new(self)
 
+
     def save(self):
         """ updates the public instance
         attribute updated_at """
         self.updated_at = datetime.utcnow()
         storage.save()
 
-    # def to_dict(self):
-    #     """  returns a dictionary """
-    #     copy_dict = self.__dict__.copy()
-    #     copy_dict["__class__"] = self.__class__.__name__
-    #     copy_dict["created_at"] = self.created_at.isoformat()
-    #     copy_dict["updated_at"] = self.updated_at.isoformat()
-    #     return copy_dict
-    
+
     def to_dict(self):
         """Returns a dictionary containing all keys/values of __dict__ of the instance."""
         copy_dict = self.__dict__.copy()
@@ -55,6 +49,7 @@ class BaseModel:
         copy_dict["__class__"] = self.__class__.__name__
 
         return copy_dict
+
 
     def __str__(self):
         """ print formated string """
