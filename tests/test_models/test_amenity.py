@@ -26,7 +26,10 @@ class TestAmenity(unittest.TestCase):
         self.assertEqual(self.amenity.name, "")
 
     def test_str_representation(self):
-        expected_output = f"[Amenity] ({self.amenity.id}) {self.amenity.__dict__}"
+        expected_output = "[Amenity] ({}) {}".format(
+                self.amenity.id,
+                self.amenity.__dict__
+                )
         self.assertEqual(str(self.amenity), expected_output)
 
     def test_to_dict_method(self):
@@ -49,6 +52,7 @@ class TestAmenity(unittest.TestCase):
     def test_edge_case_name_type(self):
         self.amenity.name = 123
         self.assertEqual(self.amenity.name, 123)
+
 
 if __name__ == '__main__':
     unittest.main()

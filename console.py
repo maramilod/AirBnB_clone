@@ -19,25 +19,23 @@ class HBNBCommand(cmd.Cmd):
         """
         return True
 
-
     def do_EOF(self, arg):
         """
         Exit the program on EOF
         """
-        print() 
+        print()
         return True
-
 
     def emptyline(self):
         """
         do nothing if the input is an empty line
         """
 
-
     def do_create(self, arg):
         """
-        Create a new instance of BaseModel, saves it (to the JSON file) and prints the id.
-        
+        Create a new instance of BaseModel,
+        saves it (to the JSON file) and prints the id.
+
         Usage: create <class_name>
         """
         if len(arg) == 0:
@@ -46,16 +44,17 @@ class HBNBCommand(cmd.Cmd):
         try:
             # create an instance
             new_instance = eval(arg)()
-            new_instance.save()   # new_instance --> "obj_class_name.id" = obj.to_dict() --> json file
+            new_instance.save()
+            # new_instance -->"obj_class_name.id" = obj.to_dict() --> json file
             print(new_instance.id)
         except Exception:
             print("** class doesn't exist **")
 
-
     def do_show(self, arg):
         """
-        Print the string representation of an instance based on the class name and id.
-        
+        Print the string representation of
+        an instance based on the class name and id.
+
         Usage: show <class_name> <instance_id>
         """
         list_of_args = arg.split()
@@ -78,9 +77,8 @@ class HBNBCommand(cmd.Cmd):
         if key not in storage.all():
             print("** no instance found **")
             return
-            
-        print(storage.all()[key])
 
+        print(storage.all()[key])
 
     def do_destroy(self, arg):
         """
@@ -114,7 +112,6 @@ class HBNBCommand(cmd.Cmd):
         del storage_instance[key]
         storage.save()
 
-
     def do_all(self, arg):
         """
         Prints all string representation of all instances
@@ -124,7 +121,7 @@ class HBNBCommand(cmd.Cmd):
         """
         list_of_args = arg.split()
         list_of_objs = []   # list of string representation of objects.
-        
+
         if len(list_of_args) == 0:
             # Print all instances
             objs = storage.all().values()
@@ -136,14 +133,12 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-
         # Print instances of a specific class
         objs = []
         for key in storage.all().keys():
             if key.startswith(class_name):
                 objs.append(storage.all()[key])
         print([str(obj) for obj in objs])
-
 
     def do_update(self, arg):
         """
@@ -192,13 +187,12 @@ class HBNBCommand(cmd.Cmd):
         attr_type = type(getattr(obj, attr_name, None))
         # Cast the attribute value to the correct type
         attr_value_casted = attr_type(attr_value)
-        
         # Update the attribute value of the object
         setattr(obj, attr_name, attr_value_casted)
 
         storage.save()
         print(f"Object {key} updated successfully")
-                    
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

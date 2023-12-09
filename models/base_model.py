@@ -28,28 +28,26 @@ class BaseModel:
             # add this new instance to the FileStorage __objects
             models.storage.new(self)
 
-
     def save(self):
         """ updates the public instance
         attribute updated_at """
         self.updated_at = datetime.utcnow()
         models.storage.save()
 
-
     def to_dict(self):
-        """Returns a dictionary containing all keys/values of __dict__ of the instance."""
+        """Returns a dictionary containing all keys/values
+        of __dict__ of the instance."""
         copy_dict = self.__dict__.copy()
-
-        # Convert created_at and updated_at to string if they are datetime objects
+        # Convert created_at and updated_at to string
         for key, value in copy_dict.items():
-            if key in ['created_at', 'updated_at'] and isinstance(value, datetime):
+            if key in ['created_at', 'updated_at'] and isinstance(
+                    value, datetime):
                 copy_dict[key] = value.isoformat()
 
         # Add the class name to the dictionary
         copy_dict["__class__"] = self.__class__.__name__
 
         return copy_dict
-
 
     def __str__(self):
         """ print formated string """

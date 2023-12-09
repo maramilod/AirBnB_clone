@@ -45,7 +45,7 @@ class TestState(unittest.TestCase):
     def test_edge_case_non_empty_name(self):
         self.state.name = "San Francisco"
         self.assertEqual(self.state.name, "San Francisco")
-    
+
     def test_edge_case_name_type(self):
         self.state.name = 123
         self.assertEqual(self.state.name, 123)

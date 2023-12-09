@@ -64,7 +64,7 @@ class TestReview(unittest.TestCase):
     def test_edge_case_user_id_type(self):
         self.review.user_id = 123
         self.assertEqual(self.review.user_id, 123)
-    
+
     def test_edge_case_text_type(self):
         self.review.text = 123
         self.assertEqual(self.review.text, 123)
