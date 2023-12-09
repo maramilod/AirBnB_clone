@@ -2,6 +2,7 @@
 import json
 from os.path import exists
 import sys
+from models.user import User
 
 
 class FileStorage:
