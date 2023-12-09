@@ -4,9 +4,9 @@
  attributes/methods
  for other classes
 """
+from models import storage
 import uuid
 from datetime import datetime
-from models import storage
 
 
 class BaseModel:
@@ -17,7 +17,7 @@ class BaseModel:
         if kwargs:
             formated = "%Y-%m-%dT%H:%M:%S.%f"
             for key, value in kwargs.items():
-                if key == "created_at" or key == "updeated_at":
+                if key == "created_at" or key == "updated_at":
                     setattr(self, key, datetime.strptime(value, formated))
                 elif key != "__class__":
                     setattr(self, key, value)
