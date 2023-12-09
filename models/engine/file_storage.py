@@ -3,13 +3,6 @@
 Define the class that manage storing data
 """
 import json
-from models.amenity import Amenity
-from models.base_model import BaseModel
-from models.city import City
-from models.place import Place
-from models.review import Review
-from models.state import State
-from models.user import User
 
 
 class FileStorage:
@@ -32,7 +25,7 @@ class FileStorage:
 
     def save(self):
         """ serializes __objects to the JSON file. """
-        data = {}
+        data = {}  # k:v <==> obj_class_name.obj_id = obj.to_dict()
         for key, obj in self.__objects.items():
             data[key] = obj.to_dict()
 
@@ -43,6 +36,11 @@ class FileStorage:
         """ deserializes the JSON file to __objects. """
         from models.base_model import BaseModel
         from models.user import User
+        from models.place import Place
+        from models.state import State
+        from models.city import City
+        from models.amenity  import Amenity 
+        from models.review import Review
 
         try:
             with open(self.__file_path, 'r') as file:
