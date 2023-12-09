@@ -4,7 +4,7 @@
  attributes/methods
  for other classes
 """
-from models import storage
+import models
 import uuid
 from datetime import datetime
 
@@ -26,14 +26,14 @@ class BaseModel:
             self.created_at = datetime.utcnow()
             self.updated_at = datetime.utcnow()
             # add this new instance to the FileStorage __objects
-            storage.new(self)
+            models.storage.new(self)
 
 
     def save(self):
         """ updates the public instance
         attribute updated_at """
         self.updated_at = datetime.utcnow()
-        storage.save()
+        models.storage.save()
 
 
     def to_dict(self):

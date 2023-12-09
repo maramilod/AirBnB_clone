@@ -10,7 +10,8 @@
       "email": "airbnb@mail.com",
       "password": "root",
       "__class__": "User"
-    }
+    },
+    "__class__": "User"
   },
   "User.97b51f87-b87f-44d7-b494-564959b4fab6": {
     "class_name": "User",
@@ -22,6 +23,82 @@
       "email": "airbnb2@mail.com",
       "password": "root",
       "__class__": "User"
-    }
+    },
+    "__class__": "User"
+  },
+  "BaseModel.51a0d8a4-c4aa-4455-bc48-96b13fb553d1": {
+    "id": "51a0d8a4-c4aa-4455-bc48-96b13fb553d1",
+    "created_at": "2023-12-09T15:23:13.045951",
+    "updated_at": "2023-12-09T15:23:13.045955",
+    "__class__": "BaseModel"
+  },
+  "BaseModel.8429b0f7-e954-47b6-ade0-74438ebdec6d": {
+    "id": "8429b0f7-e954-47b6-ade0-74438ebdec6d",
+    "created_at": "2023-12-09T15:23:13.046025",
+    "updated_at": "2023-12-09T15:23:13.046027",
+    "__class__": "BaseModel"
+  },
+  "Amenity.e4735674-186d-4adb-b6ce-f69341185a8a": {
+    "id": "e4735674-186d-4adb-b6ce-f69341185a8a",
+    "created_at": "2023-12-09T15:23:46.497352",
+    "updated_at": "2023-12-09T15:23:46.497357",
+    "__class__": "Amenity"
+  },
+  "Amenity.a3daea08-4630-469a-b24b-4a85f82de2c0": {
+    "id": "a3daea08-4630-469a-b24b-4a85f82de2c0",
+    "created_at": "2023-12-09T15:23:46.497460",
+    "updated_at": "2023-12-09T15:23:46.497461",
+    "__class__": "Amenity"
+  },
+  "Amenity.e35940a8-57c8-4133-a320-1c08148dc691": {
+    "id": "e35940a8-57c8-4133-a320-1c08148dc691",
+    "created_at": "2023-12-09T15:23:46.497496",
+    "updated_at": "2023-12-09T15:23:46.497496",
+    "name": "",
+    "__class__": "Amenity"
+  },
+  "Amenity.03c3c603-10aa-4b1f-a285-705a98006882": {
+    "id": "03c3c603-10aa-4b1f-a285-705a98006882",
+    "created_at": "2023-12-09T15:23:46.497567",
+    "updated_at": "2023-12-09T15:23:46.497567",
+    "name": 123,
+    "__class__": "Amenity"
+  },
+  "Amenity.9b188fab-4547-43d1-9594-ec27ac5cf902": {
+    "id": "9b188fab-4547-43d1-9594-ec27ac5cf902",
+    "created_at": "2023-12-09T15:23:46.497643",
+    "updated_at": "2023-12-09T15:23:46.497643",
+    "name": "Swimming Pool",
+    "__class__": "Amenity"
+  },
+  "Amenity.1c62f3df-cf64-4a90-8863-70bb33151d4d": {
+    "id": "1c62f3df-cf64-4a90-8863-70bb33151d4d",
+    "created_at": "2023-12-09T15:23:46.497721",
+    "updated_at": "2023-12-09T15:23:46.497722",
+    "__class__": "Amenity"
+  },
+  "Amenity.a5e8413a-6b58-489f-85fd-304d8637e355": {
+    "id": "a5e8413a-6b58-489f-85fd-304d8637e355",
+    "created_at": "2023-12-09T15:23:46.497782",
+    "updated_at": "2023-12-09T15:23:46.497783",
+    "__class__": "Amenity"
+  },
+  "Amenity.27c51926-283a-49fb-8382-1b0ed69f485b": {
+    "id": "27c51926-283a-49fb-8382-1b0ed69f485b",
+    "created_at": "2023-12-09T15:23:46.497882",
+    "updated_at": "2023-12-09T15:23:46.497882",
+    "__class__": "Amenity"
+  },
+  "BaseModel.8b95e3d0-5bdd-4878-9ef5-49f048af5eb8": {
+    "id": "8b95e3d0-5bdd-4878-9ef5-49f048af5eb8",
+    "created_at": "2023-12-09T15:23:46.497965",
+    "updated_at": "2023-12-09T15:23:46.497965",
+    "__class__": "BaseModel"
+  },
+  "BaseModel.2e82d1e1-fe52-4206-9d7e-25482ab45fbe": {
+    "id": "2e82d1e1-fe52-4206-9d7e-25482ab45fbe",
+    "created_at": "2023-12-09T15:23:46.498017",
+    "updated_at": "2023-12-09T15:23:46.498018",
+    "__class__": "BaseModel"
   }
 }
