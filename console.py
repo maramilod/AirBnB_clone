@@ -4,14 +4,29 @@ This module contains the entry point of the command interpreter.
 """
 import cmd
 from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity  import Amenity
+from models.review import Review
 from models import storage
-from models import classes
 
 
 class HBNBCommand(cmd.Cmd):
     """ An implementation of a command-line interpreter. """
 
     prompt = "(hbnb) "
+
+    classes = {
+        'BaseModel': BaseModel,
+        'User': User,
+        'Place': Place,
+        'State': State,
+        'City': City,
+        'Amenity': Amenity,
+        'Review': Review,
+    }
 
     def do_quit(self, arg):
         """
@@ -44,8 +59,8 @@ class HBNBCommand(cmd.Cmd):
         try:
             # create an instance
             new_instance = eval(arg)()
-            new_instance.save()
             # new_instance -->"obj_class_name.id" = obj.to_dict() --> json file
+            new_instance.save()
             print(new_instance.id)
         except Exception:
             print("** class doesn't exist **")
@@ -64,7 +79,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         class_name = list_of_args[0]
-        if class_name not in classes:
+        if class_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
 
@@ -94,7 +109,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         class_name = list_of_args[0]
-        if class_name not in classes:
+        if class_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
 
@@ -129,7 +144,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         class_name = list_of_args[0]
-        if class_name not in classes:
+        if class_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
 
@@ -154,7 +169,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         class_name = list_of_args[0]
-        if class_name not in classes:
+        if class_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
 
@@ -191,8 +206,6 @@ class HBNBCommand(cmd.Cmd):
         setattr(obj, attr_name, attr_value_casted)
 
         storage.save()
-        print(f"Object {key} updated successfully")
-
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
