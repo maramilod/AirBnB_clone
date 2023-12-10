@@ -8,7 +8,7 @@ from models.user import User
 from models.place import Place
 from models.state import State
 from models.city import City
-from models.amenity  import Amenity
+from models.amenity import Amenity
 from models.review import Review
 from models import storage
 
@@ -206,6 +206,7 @@ class HBNBCommand(cmd.Cmd):
         setattr(obj, attr_name, attr_value_casted)
 
         storage.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
