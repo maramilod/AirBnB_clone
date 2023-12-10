@@ -5,7 +5,7 @@
  for other classes
 """
 import models
-import uuid
+from uuid import uuid4
 from datetime import datetime
 
 
@@ -22,16 +22,16 @@ class BaseModel:
                 elif key != "__class__":
                     setattr(self, key, value)
         else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.utcnow()
-            self.updated_at = datetime.utcnow()
+            self.id = str(uuid4())
+            self.created_at = datetime.today()
+            self.updated_at = datetime.today()
             # add this new instance to the FileStorage __objects
             models.storage.new(self)
 
     def save(self):
         """ updates the public instance
         attribute updated_at """
-        self.updated_at = datetime.utcnow()
+        self.updated_at = datetime.today()
         models.storage.save()
 
     def to_dict(self):
