@@ -47,9 +47,7 @@ class FileStorageTest(unittest.TestCase):
             storage.reload("Name")
 
     def test_attributes(self):
-        """
-        test_attributes
-        """
+        """Test attributes"""
         self.assertEqual(str, type(FileStorage._FileStorage__file_path))
         self.assertEqual(dict, type(FileStorage._FileStorage__objects))
         self.assertFalse(hasattr(storage, '__file_path'))
@@ -94,6 +92,7 @@ class FileStorageTest(unittest.TestCase):
         """Test reload file not exists"""
         new_fs = FileStorage()
         new_fs.reload()
+        self.assertEqual(new_fs.all(), {})
 
     def test_reload_file_exists(self):
         """Test reload file exists"""
@@ -102,13 +101,77 @@ class FileStorageTest(unittest.TestCase):
         self.assertNotEqual(content, {})
 
     def test_all_non_empty(self):
-        """Test all none empty"""
+        """Test all non-empty"""
         new_fs = FileStorage()
         new_user = User()
         new_base_model = BaseModel()
         new_fs.new(new_user)
         new_fs.new(new_base_model)
         self.assertNotEqual(new_fs.all(), {})
+
+    def test_reload_invalid_json(self):
+        """Test reload with invalid JSON"""
+        with open("file.json", "w") as file:
+            file.write("Invalid JSON")
+        new_fs = FileStorage()
+        new_fs.reload()
+        self.assertEqual(new_fs.all(), {})
+
+    def test_save_reload_multiple_objects(self):
+        """Test saving and reloading multiple objects"""
+        new_fs = FileStorage()
+        new_user1 = User()
+        new_user2 = User()
+        new_fs.new(new_user1)
+        new_fs.new(new_user2)
+        new_fs.save()
+        new_fs.reload()
+        self.assertIn(f"User.{new_user1.id}", new_fs.all())
+        self.assertIn(f"User.{new_user2.id}", new_fs.all())
+
+    def test_new_empty_dict(self):
+        """Test new method with an empty dictionary"""
+        new_fs = FileStorage()
+        new_fs.new({})
+        self.assertEqual(new_fs.all(), {})
+
+    def test_save_reload_multiple_models(self):
+        """Test saving and reloading multiple model instances"""
+        new_fs = FileStorage()
+        new_state = State()
+        new_city = City()
+        new_fs.new(new_state)
+        new_fs.new(new_city)
+        new_fs.save()
+        new_fs.reload()
+        self.assertIn(f"State.{new_state.id}", new_fs.all())
+        self.assertIn(f"City.{new_city.id}", new_fs.all())
+
+    def test_new_invalid_dict(self):
+        """Test new method with an invalid dictionary"""
+        new_fs = FileStorage()
+        with self.assertRaises(AttributeError):
+            new_fs.new("invalid")
+
+    def test_reload_invalid_file(self):
+        """Test reload with an invalid file"""
+        with open("file.json", "w") as file:
+            file.write("Invalid JSON")
+        new_fs = FileStorage()
+        new_fs.reload()
+        self.assertEqual(new_fs.all(), {})
+
+    def test_save_reload_mixed_models(self):
+        """Test saving and reloading instances of different models"""
+        new_fs = FileStorage()
+        new_user = User()
+        new_place = Place()
+        new_fs.new(new_user)
+        new_fs.new(new_place)
+        new_fs.save()
+        new_fs.reload()
+        self.assertIn(f"User.{new_user.id}", new_fs.all())
+        self.assertIn(f"Place.{new_place.id}", new_fs.all())
 
 
 if __name__ == "__main__":
