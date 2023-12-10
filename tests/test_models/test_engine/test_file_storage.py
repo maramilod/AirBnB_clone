@@ -14,46 +14,102 @@ import os
 import json
 
 
-class TestFileStorage(unittest.TestCase):
+class FileStorageTest(unittest.TestCase):
+    """Unittests for FileStorage"""
 
     def setUp(self):
-        """Set up for test cases."""
-        self.file_path = FileStorage._FileStorage__file_path
-        self.objects = FileStorage._FileStorage__objects
+        """Set up test environment"""
+        try:
+            os.remove("file.json")
+        except FileNotFoundError:
+            pass
 
     def tearDown(self):
-        """Tear down after test cases."""
-        if os.path.exists(self.file_path):
-            os.remove(self.file_path)
+        """Clean up after each test"""
+        try:
+            os.remove("file.json")
+        except FileNotFoundError:
+            pass
 
-    def test_all(self):
-        """Test the all method."""
-        storage = FileStorage()
-        self.assertEqual(storage.all(), self.objects)
+    def test_wrong_args(self):
+        '''all the methods with wrong args'''
+        with self.assertRaises(TypeError):
+            FileStorage(None)
+        with self.assertRaises(TypeError):
+            storage.save(None)
+        with self.assertRaises(TypeError):
+            storage.all("what")
+        with self.assertRaises(AttributeError):
+            storage.new("is")
+        with self.assertRaises(TypeError):
+            storage.save("you'r")
+        with self.assertRaises(TypeError):
+            storage.reload("Name")
 
-    def test_new(self):
-        """Test the new method."""
-        storage = FileStorage()
-        obj = BaseModel()
-        storage.new(obj)
-        key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.assertIn(key, storage.all())
+    def test_attributes(self):
+        """
+        test_attributes
+        """
+        self.assertEqual(str, type(FileStorage._FileStorage__file_path))
+        self.assertEqual(dict, type(FileStorage._FileStorage__objects))
+        self.assertFalse(hasattr(storage, '__file_path'))
+        self.assertFalse(hasattr(storage, '__objects'))
+        self.assertEqual(type(storage), FileStorage)
 
-    def test_save_reload(self):
-        """Test the save and reload methods."""
-        storage = FileStorage()
-        obj = BaseModel()
-        storage.new(obj)
-        storage.save()
+    def test_all_empty(self):
+        """Test all empty"""
+        new_fs = FileStorage()
+        FileStorage._FileStorage__objects = {}
+        new_fs.reload()
+        self.assertEqual(new_fs.all(), {})
+        self.assertEqual(dict, type(new_fs.all()))
 
-        # Create a new storage instance to test reload
-        new_storage = FileStorage()
-        new_storage.reload()
-        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+    def test_new_object(self):
+        """Test new object"""
+        a_fs = FileStorage()
+        FileStorage._FileStorage__objects = {}
+        new_user = User()
+        new_BM = BaseModel()
+        a_fs.new(new_user)
+        a_fs.new(new_BM)
+        expected = {f"User.{new_user.id}": new_user,
+                    f"BaseModel.{new_BM.id}": new_BM}
+        self.assertEqual(a_fs.all(), expected)
 
-        self.assertIn(key, new_storage.all())
-        self.assertIsInstance(new_storage.all()[key], BaseModel)
+    def test_save_object(self):
+        """Test save objects"""
+        new_fs = FileStorage()
+        new_user = User()
+        new_fs.new(new_user)
+        new_BM = BaseModel()
+        new_fs.save()
+        U_key = f"User.{new_user.id}"
+        BM_key = f"BaseModel.{new_BM.id}"
+        with open("file.json", "r") as file:
+            file_content = json.load(file)
+            self.assertTrue(file_content.get(U_key))
+            self.assertTrue(file_content.get(BM_key))
+
+    def test_reload_file_not_exist(self):
+        """Test reload file not exists"""
+        new_fs = FileStorage()
+        new_fs.reload()
+
+    def test_reload_file_exists(self):
+        """Test reload file exists"""
+        storage.reload()
+        content = storage.all()
+        self.assertNotEqual(content, {})
+
+    def test_all_non_empty(self):
+        """Test all none empty"""
+        new_fs = FileStorage()
+        new_user = User()
+        new_base_model = BaseModel()
+        new_fs.new(new_user)
+        new_fs.new(new_base_model)
+        self.assertNotEqual(new_fs.all(), {})
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
