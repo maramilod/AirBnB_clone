@@ -25,7 +25,8 @@ class FileStorage:
 
     def save(self):
         """ serializes __objects to the JSON file. """
-        data = {}  # k:v <==> obj_class_name.obj_id = obj.to_dict()
+        # k:v <==> obj_class_name.obj_id = obj.to_dict()
+        data = {}
         for key, obj in self.__objects.items():
             data[key] = obj.to_dict()
 
@@ -39,7 +40,7 @@ class FileStorage:
         from models.place import Place
         from models.state import State
         from models.city import City
-        from models.amenity  import Amenity 
+        from models.amenity import Amenity
         from models.review import Review
 
         try:
