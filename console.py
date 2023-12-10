@@ -45,6 +45,7 @@ class HBNBCommand(cmd.Cmd):
         """
         do nothing if the input is an empty line
         """
+        pass
 
     def do_create(self, arg):
         """
