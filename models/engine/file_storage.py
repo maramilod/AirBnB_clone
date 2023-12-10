@@ -54,9 +54,7 @@ class FileStorage:
                         # Evaluate the class name and assign it to class_obj
                         class_obj = eval(class_name)
                         if class_obj:
-                            ''' create a new obj_instance from
-                            the class "class_obj" & initialize its attributes
-                            with the dict "value"'''
+                            # create obj & initialize its attrs with "value"
                             obj_instance = class_obj(**value)
                             # add the new obj_instance to the __objects dict
                             self.__objects[key] = obj_instance
